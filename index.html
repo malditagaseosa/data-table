@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Prueba Desarrollador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Jquery -->
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!---->
+    <!-- Bootstrap files -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <!---->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .activo {
+            background-color: green;
+            color: white;
+            padding: 8px;
+            border-radius: 25px;
+        }
+
+        .inactivo {
+            background-color: red;
+            color: white;
+            padding: 8px;
+            border-radius: 25px;
+        }
+
+        .controls {
+            width: 100%;
+            margin: 2% 0 2% 0;
+            height: 50px;
+        }
+
+        .controls > input {
+            float: left;
+            width: 30%
+        }
+
+        .controls > button {
+            float: right;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <br><br>
+    <main id="app" class="container">
+        <div class="controls">
+            <input v-model="busqueda" class="form-control" type="text" placeholder="Buscar" name="buscador" id="buscador">
+            <button id="btn-crear-producto" data-toggle="modal" data-target="#modal-producto" class="btn btn-success">Crear Producto</button>
+        </div>
+        <table v-cloak class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Bodega</th>
+                    <th>Cantidad</th>
+                    <th>Estado</th>
+                    <th>Gestion</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                <tr v-for="(registro, index) in productosFiltrados">
+                    <td>{{registro.producto}}</td>
+                    <td>{{registro.bodega.nombre}}</td>
+                    <td>{{registro.cantidad}}</td>
+                    <td><span v-bind:class="{ activo: registro.estado.id, inactivo: !registro.estado.id }">{{registro.estado.nombre}}</span></td>
+                    <td><button v-on:click="handleUpdate(registro)" class="btn btn-info">Cambiar Estado</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal-producto">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Crear Producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-producto" action="urlpost" method="POST">
+                            <input v-model="form.key" type="hidden" id="key" name="key" value="">
+                            <div class="form-group">
+                                <label for="producto">Producto</label>
+                                <input v-model="form.producto" class="form-control" type="text" name="producto" id="porducto">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="cantidad">Cantidad</label>
+                                        <input v-model="form.cantidad" class="form-control" type="number" name="cantidad" id="cantidad">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="estado">
+                                            Estado
+                                        </label>
+                                        <select v-model="form.estado" class="form-control" name="estado" id="estado">
+                                            <option  v-for="estado in estados" :value="JSON.stringify(estado)">{{estado.nombre}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="bodega">Bodega</label>
+                                <select v-model="form.bodega" class="form-control" name="bodega" id="bodega">
+                                    <option  v-for="bodega in bodegas" :value="JSON.stringify(bodega)">{{bodega.nombre}}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="observaciones">Observaciones</label>
+                                <textarea v-model="form.observacion" class="form-control" name="observaciones" id="observaciones" cols="30" rows="10"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button v-on:click="handleSave" type="button" class="btn btn-primary">Guardar</button>
+                        <button v-on:click="handleCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <script src="js/database/database.service.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
