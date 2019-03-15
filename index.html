@@ -14,7 +14,6 @@
     <!---->
     <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
     <br><br>
@@ -33,7 +32,7 @@
                     <th>Gestion</th>
                 </tr>
             </thead>
-            <tbody class="list">
+            <tbody v-cloak>
                 <tr v-for="(registro, index) in productosFiltrados">
                     <td>{{registro.producto}}</td>
                     <td>{{registro.bodega.nombre}}</td>
@@ -43,7 +42,7 @@
                 </tr>
             </tbody>
         </table>
-        <div class="clearfix btn-group col-md-2 offset-md-5">
+        <div v-cloak class="clearfix btn-group col-md-2 offset-md-5">
             <button type="button" class="btn btn-sm btn-outline-secondary" v-if="this.pagina != 1" @click="pagina--"> << </button>
             <button type="button" class="btn btn-sm btn-outline-secondary" v-for="n_pagina in paginas.slice(pagina-1, pagina+5)" @click="pagina = n_pagina"> {{n_pagina}} </button>
             <button type="button" @click="pagina++" v-if="pagina < paginas.length" class="btn btn-sm btn-outline-secondary"> >> </button>
@@ -102,7 +101,9 @@
                 </div>
             </div>
     </main>
-    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+    <script src="js/vue.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase-database.js"></script>
     <script src="js/database/database.service.js"></script>
     <script src="js/main.js"></script>
 </body>

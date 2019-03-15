@@ -106,16 +106,18 @@ var app = new Vue({
                 this.productos = Object.keys(snapshot.val()).map((el)=>{
                     return snapshot.val()[el];
                 });
-                console.log(this.productos);
+                console.log(this.productos, this.paginas);
             }else{
                 return
             }
         },
         setPaginas: function() {
+            this.paginas = [];
             let num_paginas = Math.ceil(this.productos.length/this.porPagina);
             for (let i = 1; i <= num_paginas; i++){
                 this.paginas.push(i);
-            }
+            };
+            console.log('set paginas', this.paginas);
         },
         paginacion: function(productos) {
             let pagina = this.pagina;
