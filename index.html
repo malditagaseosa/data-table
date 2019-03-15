@@ -12,86 +12,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/bootstrap.min.js"></script>
     <!---->
+    <link rel="stylesheet" href="css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <style>
-        .activo {
-            background-color: green;
-            color: white;
-            padding: 8px;
-            border-radius: 25px;
-        }
-
-        .inactivo {
-            background-color: red;
-            color: white;
-            padding: 8px;
-            border-radius: 25px;
-        }
-
-        .controls {
-            width: 100%;
-            margin: 2% 0 2% 0;
-            height: 50px;
-        }
-
-        .controls > input {
-            float: left;
-            width: 30%
-        }
-
-        .controls > button {
-            float: right;
-        }
-
-        /* 
-        This query will take effect for any screen smaller than 760px
-        and also iPads specifically.
-        */
-        @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  {
-
-            /* search input adjustment */
-            #buscador {
-                width: 55%;
-            }
-
-            table, thead, tbody, th, td, tr { 
-                display: block; 
-            }
-            
-            /* Hide table headers (but not display: none;, for accessibility) */
-            thead tr { 
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            
-            tr { border: 1px solid #ccc; }
-            
-            td:before { 
-                font-weight: bold;
-                padding-right: 50px; 
-                white-space: nowrap;
-            }
-
-            td { 
-                border: none;
-                border-bottom: 1px solid #eee; 
-                position: relative;
-                padding-left: 50%; 
-            }
-	
-            /*
-            Label the data
-            */
-            td:nth-of-type(1):before { content: "Producto:"; }
-            td:nth-of-type(2):before { content: "Bodega:"; }
-            td:nth-of-type(3):before { content: "Cantidad:"; }
-            td:nth-of-type(4):before { content: "Estado:"; }
-            td:nth-of-type(5):before { content: "Gestión:"; }
-        }
-    
-    </style>
 </head>
 <body>
     <br><br>
