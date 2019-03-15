@@ -1,3 +1,3 @@
-# Vista Productos
+# Data Table View
 
-Vista con un formulario y una tabla, permite editar y registrar productos por medio de un modal
+View with data table and modal form using Vuejs, something of jQuery and a little layer for firebase.
