@@ -16,7 +16,11 @@ var app = new Vue({
         estados: [],
         form: {},
         productos: [],
-        busqueda: ''
+        busqueda: '',
+        pagina: 1,
+        porPagina: 5,
+        paginas: [],
+
     },
     created: function() {
         this.loadListadoBodegas();
@@ -107,15 +111,33 @@ var app = new Vue({
                 return
             }
         },
+        setPaginas: function() {
+            let num_paginas = Math.ceil(this.productos.length/this.porPagina);
+            for (let i = 1; i <= num_paginas; i++){
+                this.paginas.push(i);
+            }
+        },
+        paginacion: function(productos) {
+            let pagina = this.pagina;
+            let porPagina = this.porPagina;
+            let inicio = (pagina * porPagina) - porPagina;
+            let final = (pagina * porPagina);
+            return productos.slice(inicio, final);
+        },
         error: function(error){
             console.log(error);
         }
     },
     computed: {
         productosFiltrados: function(){
-            return this.productos.filter(p => {
+            return this.paginacion(this.productos).filter(p => {
                 return p.producto.toLowerCase().indexOf(this.busqueda.toLowerCase()) > -1;
             });
+        }
+    },
+    watch: {
+        productos: function(){
+            this.setPaginas();
         }
     }
   })
