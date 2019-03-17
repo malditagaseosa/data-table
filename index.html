@@ -42,7 +42,7 @@
                 </tr>
             </tbody>
         </table>
-        <div v-cloak class="clearfix btn-group col-md-2 offset-md-5">
+        <div v-cloak id="btngroup-pagination" class="clearfix btn-group col-md-2 offset-md-5">
             <button type="button" class="btn btn-sm btn-outline-secondary" v-if="this.pagina != 1" @click="pagina--"> << </button>
             <button type="button" class="btn btn-sm btn-outline-secondary" v-for="n_pagina in paginas.slice(pagina-1, pagina+5)" @click="pagina = n_pagina"> {{n_pagina}} </button>
             <button type="button" @click="pagina++" v-if="pagina < paginas.length" class="btn btn-sm btn-outline-secondary"> >> </button>
