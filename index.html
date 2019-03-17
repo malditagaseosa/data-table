@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody v-cloak>
-                <tr v-for="(registro, index) in productosFiltrados">
+                <tr v-for="(registro, index) in this.paginacion(productosFiltrados)">
                     <td>{{registro.producto}}</td>
                     <td>{{registro.bodega.nombre}}</td>
                     <td>{{registro.cantidad}}</td>
