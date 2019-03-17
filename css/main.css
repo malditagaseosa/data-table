@@ -27,6 +27,10 @@
     float: right;
 }
 
+#btngroup-pagination {
+    margin-bottom: 5%;
+}
+
 [v-cloak] {
     display: none;
 }
